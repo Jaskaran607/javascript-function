@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Functions and Arrays Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Functions & Arrays Example</h1>
+
+    <button onclick="showFruits()">Show Fruits</button>
+    <button onclick="addFruit()">Add Fruit</button>
+
+    <div id="output"></div>
+
+    <script>
+        // Array of fruits
+        let fruits = ["Apple", "Banana", "Orange"];
+
+        // Function to display fruits
+        function showFruits() {
+            document.getElementById("output").innerHTML = "Fruits: " + fruits.join(", ");
+        }
+
+        // Function to add a fruit
+        function addFruit() {
+            let newFruit = prompt("Enter a fruit name:");
+            if (newFruit) {
+                fruits.push(newFruit);
+                showFruits();
+            }
+        }
+    </script>
+
+</body>
+</html>
