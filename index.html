@@ -2,58 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>JavaScript Functions and Arrays Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Function Examples</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
         }
+        .example {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
         button {
-            padding: 10px 20px;
-            margin-top: 10px;
+            padding: 8px 15px;
             background-color: #4CAF50;
             color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
-            border-radius: 5px;
+            margin: 5px 0;
         }
         button:hover {
             background-color: #45a049;
         }
-        #output {
-            margin-top: 20px;
-            font-size: 18px;
+        input {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .error {
+            border: 1px solid red;
         }
     </style>
 </head>
 <body>
+    <h1>JavaScript Function Examples</h1>
 
-    <h1>JavaScript Functions & Arrays Example</h1>
+    <!-- Example 1: Basic Function -->
+    <div class="example">
+        <h2>1. Basic Greeting Function</h2>
+        <button onclick="greetUser('Sarah')">Click to Greet</button>
+    </div>
 
-    <button onclick="showFruits()">Show Fruits</button>
-    <button onclick="addFruit()">Add Fruit</button>
+    <!-- Example 2: DOM Manipulation -->
+    <div class="example">
+        <h2>2. DOM Manipulation</h2>
+        <p id="changeableText">This text will change when you click the button.</p>
+        <button onclick="changeText('changeableText', 'The text has been changed!')">Change Text</button>
+    </div>
 
-    <div id="output"></div>
+    <!-- Example 3: Event Listener -->
+    <div class="example">
+        <h2>3. Event Listener</h2>
+        <button id="eventButton">Click Me (set up with event listener)</button>
+    </div>
+
+    <!-- Example 4: Form Validation -->
+    <div class="example">
+        <h2>4. Form Validation</h2>
+        <form id="sampleForm" onsubmit="return validateForm('sampleForm')">
+            <div>
+                <label>Name (required):</label>
+                <input type="text" id="name" required>
+            </div>
+            <div>
+                <label>Email (required):</label>
+                <input type="email" id="email" required>
+            </div>
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+
+    <!-- Example 5: Toggle Visibility -->
+    <div class="example">
+        <h2>5. Toggle Visibility</h2>
+        <p id="toggleText" style="display: none;">This element can be toggled!</p>
+        <button onclick="toggleVisibility('toggleText')">Toggle Text</button>
+    </div>
 
     <script>
-        // Array of fruits
-        let fruits = ["Apple", "Banana", "Orange"];
-
-        // Function to display fruits
-        function showFruits() {
-            document.getElementById("output").innerHTML = "Fruits: " + fruits.join(", ");
+        // 1. Basic Greeting Function
+        function greetUser(name) {
+            alert(`Hello, ${name}! Welcome to our website.`);
         }
 
-        // Function to add a fruit
-        function addFruit() {
-            let newFruit = prompt("Enter a fruit name:");
-            if (newFruit) {
-                fruits.push(newFruit);
-                showFruits();
+        // 2. DOM Manipulation Function
+        function changeText(elementId, newText) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = newText;
+            } else {
+                console.error(`Element with ID ${elementId} not found`);
+            }
+        }
+
+        // 3. Event Listener Function
+        function setupButton(buttonId, callback) {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.addEventListener('click', callback);
+            }
+        }
+        
+        // Setup the event button
+        setupButton('eventButton', function() {
+            alert('Button was clicked using an event listener!');
+        });
+
+        // 4. Form Validation Function
+        function validateForm(formId) {
+            const form = document.getElementById(formId);
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            if (isValid) {
+                alert('Form is valid and would be submitted!');
+                // In a real application, you would return true to allow submission
+                // form.submit();
+            } else {
+                alert('Please fill in all required fields.');
+            }
+
+            return false; // Prevent actual form submission for this demo
+        }
+
+        // 5. Toggle Visibility Function
+        function toggleVisibility(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                if (element.style.display === 'none') {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
             }
         }
     </script>
-
 </body>
 </html>
